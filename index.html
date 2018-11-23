@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Filipe Belatti's Git Talk</title>
+    <link rel="stylesheet" type="text/css" href="src/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="src/css/gitgraph.css" />
+  </head>
+  <body>
+    <section>
+      <!-- GitGraph canvas -->
+      <canvas id="gitGraph"></canvas>
+
+      <!-- Details divs -->
+      <div id="quick-introduction" class="gitgraph-detail">
+        <p>A lightning talk showcasing a real life example of how an organised and well structured git branching model and workflow can contribute to a project's success.</p>
+      </div>
+
+      <div id="agenda-real-life-example" class="gitgraph-detail">
+        <p>Setup and integrations</p>
+      </div>
+      <div id="agenda-commit-messages" class="gitgraph-detail">
+        <p>Helping yourself and others</p>
+      </div>
+      <div id="agenda-usual-flow" class="gitgraph-detail">
+        <p>Working on features, bugs, etc</p>
+      </div>
+      <div id="agenda-new-challenger" class="gitgraph-detail"></div>
+      <div id="agenda-keeping-up-to-date" class="gitgraph-detail">
+        <p>Fetching, Merging, Rebasing</p>
+      </div>
+
+      <div id="real-life-examples" class="gitgraph-detail">
+        <h2>Git Flow </h2>
+
+        <h3>Using git rebase</h3>
+        <canvas id="gitgraph-example-gitflow-rebase"></canvas>
+        <h3>Using git merge</h3>
+        <canvas id="gitgraph-example-gitflow-merge"></canvas>
+        <h3>Using git merge to resolve conflicts</h3>
+        <canvas id="gitgraph-example-gitflow-merge-conflict"></canvas>
+
+        <h2>Trunk-based development</h2>
+        <canvas id="gitgraph-example-trunk"></canvas>
+
+      </div>
+
+      <div id="commit-messages" class="gitgraph-detail">
+        <p>
+          Commit messages are a fundamental source of information about a codebase.
+          They tell the project's story, saying <b>what</b>, <b>when</b> and <b>why</b> things are now the way they are.
+        </p>
+        <p>A well-cared for log can make tools like <code>git log</code>, <code>git blame</code> and more come to life.</p>
+        <p>Concise messages can help to:</p>
+        <ul>
+          <li>Provide meaningful context to fellow developers (and to your future self)</li>
+          <li>Understand what a pull request is about</li>
+          <li>Understand why a certain piece of code exists</li>
+          <li>Search when code was added or removed</li>
+          <li>Track down the source of bugs in our code</li>
+          <li>Improve a projects maintainability</li>
+        </ul>
+
+        <p>We as developers have conventions and code styles in place to write idiomatic code, so our git history should be no different.</p>
+      </div>
+
+      <div id="commit-messages-sample-rules" class="gitgraph-detail">
+
+          <p>Here's seven ways of achieving a great commit message:</p>
+          <ul>
+              <li>Separate subject from body with a blank line</li>
+              <li>Limit the subject line to 50 characters</li>
+              <li>Capitalize the subject line</li>
+              <li>Do not end the subject line with a period</li>
+              <li>Use the imperative mood in the subject line</li>
+              <li>Wrap the body at 72 characters</li>
+              <li>Use the body to explain what and why vs. how</li>
+          </ul>
+        </div>
+
+
+      <div id="sources-and-recommended-reads" class="gitgraph-detail">
+        <h3>If you're really into git</h3>
+        <p><a href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">Git from the inside out</a></p>
+
+        <h3>Branching models</h3>
+        <p><a href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></p>
+        <p><a href="https://www.toptal.com/software/trunk-based-development-git-flow">Trunk-based Development vs. Git Flow</a></p>
+
+        <h3>Commit messages</h3>
+        <p><a href="https://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message</a></p>
+
+        <h3>Other topics</h3>
+        <p><a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
+        <p><a href="https://nathanleclaire.com/blog/2014/09/14/dont-be-scared-of-git-rebase/">Don't Be Scared of git rebase</a></p>
+        <p><a href="https://medium.com/@fredrikmorken/why-you-should-stop-using-git-rebase-5552bee4fed1">Why you should stop using Git rebase</a></p>
+      </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="src/js/dependencies/gitgraph.1.13.0.min.js"></script>
+
+    <script src="src/js/gitgraphtemplate.js"></script>
+    <script src="src/js/examples/rebase.js"></script>
+    <script src="src/js/examples/merge.js"></script>
+    <script src="src/js/examples/mergewithconflict.js"></script>
+    <script src="src/js/examples/trunk.js"></script>
+    <script src="src/js/index.js"></script>
+  </body>
+</html>
