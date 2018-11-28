@@ -65,3 +65,7 @@ section {
   background-color: #fff;
   border-radius: 25px;
 }
+
+:root {
+  --mdc-theme-primary: #03a9f4;
+}
