@@ -1,24 +1,25 @@
 // ----------------------- TEMPLATE FOR ALL GRAPHS ----------------------- //
 var defaultTemplateConfig = {
-  colors: [ "#03a9f4", "#757575", "#8bc34a", "#e91e63", "#ff9800"  ],
+  colors: ["#03a9f4", "#a1a1a1", "#8bc34a", "#e91e63", "#ff9800"],
   branch: {
-    lineWidth: 8,
+    lineWidth: 6,
     spacingX: 50,
     showLabel: true,
+    labelFont: "normal 10pt Arial"
   },
   commit: {
-    spacingY: -50,
+    spacingY: -40,
     dot: {
-      size: 12
+      size: 10
     },
     message: {
       displayAuthor: false,
       displayBranch: false,
       displayHash: false,
-      font: "normal 12pt Calibri"
+      font: "normal 12pt Arial"
     },
-    shouldDisplayTooltipsInCompactMode: true,
-    tooltipHTMLFormatter: function ( commit ) {
+    shouldDisplayTooltipsInCompactMode: false,
+    tooltipHTMLFormatter: function (commit) {
       return "" + commit.sha1 + "" + ": " + commit.message;
     }
   }
