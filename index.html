@@ -1,112 +1,221 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Filipe Belatti's Git Talk</title>
-    <link rel="stylesheet" type="text/css" href="src/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="src/css/gitgraph.css" />
-  </head>
-  <body>
-    <section>
-      <!-- GitGraph canvas -->
-      <canvas id="gitGraph"></canvas>
 
-      <!-- Details divs -->
-      <div id="quick-introduction" class="gitgraph-detail">
-        <p>A lightning talk showcasing a real life example of how an organised and well structured git branching model and workflow can contribute to a project's success.</p>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <title>Filipe Belatti's Git Talk</title>
 
-      <div id="agenda-real-life-example" class="gitgraph-detail">
-        <p>Setup and integrations</p>
-      </div>
-      <div id="agenda-commit-messages" class="gitgraph-detail">
-        <p>Helping yourself and others</p>
-      </div>
-      <div id="agenda-usual-flow" class="gitgraph-detail">
-        <p>Working on features, bugs, etc</p>
-      </div>
-      <div id="agenda-new-challenger" class="gitgraph-detail"></div>
-      <div id="agenda-keeping-up-to-date" class="gitgraph-detail">
-        <p>Fetching, Merging, Rebasing</p>
-      </div>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="src/css/material-components-web.min.css" />
+  <link rel="stylesheet" type="text/css" href="src/css/gitgraph.css" />
+  <link rel="stylesheet" type="text/css" href="src/css/index.css" />
+</head>
 
-      <div id="real-life-examples" class="gitgraph-detail">
-        <h2>Git Flow </h2>
+<body>
+  <section>
+    <!-- GitGraph canvas -->
+    <canvas id="gitGraph"></canvas>
 
-        <h3>Using git rebase</h3>
-        <canvas id="gitgraph-example-gitflow-rebase"></canvas>
-        <h3>Using git merge</h3>
-        <canvas id="gitgraph-example-gitflow-merge"></canvas>
-        <h3>Using git merge to resolve conflicts</h3>
-        <canvas id="gitgraph-example-gitflow-merge-conflict"></canvas>
+    <!-- Details divs -->
+    <div id="quick-introduction" class="gitgraph-detail">
+      <p>A ⚡ lightning talk ⚡ showcasing how an organised and well-structured git branching model and workflow can contribute to a project's success.</p>
+    </div>
 
-        <h2>Trunk-based development</h2>
-        <canvas id="gitgraph-example-trunk"></canvas>
+    <div id="agenda-keeping-up-to-date" class="gitgraph-detail">
+      <p>Fetching, Merging, Rebasing, Squashing</p>
+    </div>
+    <div id="agenda-real-life-example" class="gitgraph-detail">
+      <p>A few common branching models and their graphs</p>
+    </div>
+    <div id="agenda-integrations-and-policies" class="gitgraph-detail">
+      <p>Avoid silly issues with an well-oiled machine</p>
+    </div>
+    <div id="agenda-commit-messages" class="gitgraph-detail">
+      <p>Helping yourself and others</p>
+    </div>
 
-      </div>
+    <div id="keeping-sync" class="gitgraph-detail">
+        <p>Regardless of your branching model of choice it is important to keep your local copy up to date. If the intervals in between updates are too long, chances are you're working in an outdated codebase and you'll have some conflicts to solve.</p>
 
-      <div id="commit-messages" class="gitgraph-detail">
-        <p>
-          Commit messages are a fundamental source of information about a codebase.
-          They tell the project's story, saying <b>what</b>, <b>when</b> and <b>why</b> things are now the way they are.
-        </p>
-        <p>A well-cared for log can make tools like <code>git log</code>, <code>git blame</code> and more come to life.</p>
-        <p>Concise messages can help to:</p>
+        <h3>Fetch & Merge <i>vs.</i> Pull</h3>
+        <p>This isn't really a discussion as in the end it comes down to personal preference, but here's some food for thought. There are times where you want to follow and understand every step of the process rather than just letting the magic happen ✨. By running <code>git fetch</code> before <i>choosing</i> to merge you're given the chance to examine the changes you just brought into your local copy. It allows you to learn the distinction between branch types while also giving more flexibility to organise your work.</p>
+
+        <h3>The history you want tell</h3>
+        <p>When working in a <i>feature branch</i> there are a few options to keep your local work up-to-date and to update the remote.</p>
         <ul>
-          <li>Provide meaningful context to fellow developers (and to your future self)</li>
-          <li>Understand what a pull request is about</li>
-          <li>Understand why a certain piece of code exists</li>
-          <li>Search when code was added or removed</li>
-          <li>Track down the source of bugs in our code</li>
-          <li>Improve a projects maintainability</li>
+          <li>
+            <code>merge</code>
+            <p>If you're going to be isolated in a branch for a while, consider merging the base branch into it from time to time. That way, you'll be able to work in an updated codebase and will avoid massive conflicts.</p>
+            <p>When the time comes to update the remote with your work, depending on the team's strategy, you can use the <code>--no-ff</code> flag to preserve the graph of that feature branch, making it easier to understand when that change started and finished.</p>
+          </li>
+          <li>
+            <code>rebase</code>
+            <p>When working locally, for the most part it would make sense for your changes to be introduced at the tip of the base branch, and only then published for review or integrated into the main branch.</p>
+          </li>
+          <li>
+            <code>squash</code>
+            <p>Regardless if you're running <code>git merge</code>, <code>git merge --no-ff</code> or <code>git rebase</code>, it could be that you also want to <i>squash</i> all your changes into a single commit. That way, the history would be concise and all the diffs related to that change are tracked through a single commit.</p>
+          </li>
         </ul>
-
-        <p>We as developers have conventions and code styles in place to write idiomatic code, so our git history should be no different.</p>
+        <br />
       </div>
 
-      <div id="commit-messages-sample-rules" class="gitgraph-detail">
+    <div id="real-life-examples" class="gitgraph-detail">
+      <p>Here are some examples of what you can expect your git working tree to look depending on the branching model of choice.</p>
 
-          <p>Here's seven ways of achieving a great commit message:</p>
-          <ul>
-              <li>Separate subject from body with a blank line</li>
-              <li>Limit the subject line to 50 characters</li>
-              <li>Capitalize the subject line</li>
-              <li>Do not end the subject line with a period</li>
-              <li>Use the imperative mood in the subject line</li>
-              <li>Wrap the body at 72 characters</li>
-              <li>Use the body to explain what and why vs. how</li>
-          </ul>
-        </div>
+      <h2>Git Flow</h2>
 
+      <h3>● Using git rebase</h3>
+      <canvas id="gitgraph-example-gitflow-rebase"></canvas>
+      <p>Rebase is very controversial (which is expected from something that <b>rewrites the history</b>), but it can be very useful. It favors visualisation and isolates each feature in chunks (if using <code>--no-ff</code> to merge).</p>
 
-      <div id="sources-and-recommended-reads" class="gitgraph-detail">
-        <h3>If you're really into git</h3>
-        <p><a href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">Git from the inside out</a></p>
+      <h3>● Using git merge</h3>
+      <canvas id="gitgraph-example-gitflow-merge"></canvas>
+      <p>Rebasing can be tricky and painful, especially if you have conflicts. It can also introduce an overhead if you have checks that run before a branch can be merged since they'll have to run again for the new SHAs. In this situations, you're better off considering a merge.</p>
 
-        <h3>Branching models</h3>
-        <p><a href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></p>
-        <p><a href="https://www.toptal.com/software/trunk-based-development-git-flow">Trunk-based Development vs. Git Flow</a></p>
+      <h3>● Using git merge to resolve conflicts</h3>
+      <canvas id="gitgraph-example-gitflow-merge-conflict"></canvas>
+      <p>This can be necessary if you have to merge using a <i>Pull Request</i> when you don't want to rebase. Merge the target branch into your working branch first, resolving the conflicts and then update the remote tracking branch.</p>
 
-        <h3>Commit messages</h3>
-        <p><a href="https://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message</a></p>
+      <h2>Trunk-based development</h2>
+      <canvas id="gitgraph-example-trunk"></canvas>
+      <p>The team might choose to work in a single branch, allowing a fast paced continuous integration and delivery while avoiding conflicts. Short-lived feature branches are also possible, being merged straight to the main branch after all the checks have passed.</p>
+      <br />
+    </div>
 
-        <h3>Other topics</h3>
-        <p><a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
-        <p><a href="https://nathanleclaire.com/blog/2014/09/14/dont-be-scared-of-git-rebase/">Don't Be Scared of git rebase</a></p>
-        <p><a href="https://medium.com/@fredrikmorken/why-you-should-stop-using-git-rebase-5552bee4fed1">Why you should stop using Git rebase</a></p>
-      </div>
-    </section>
+    <div id="commit-messages" class="gitgraph-detail">
+      <p>
+        Commit messages are a fundamental source of information about a codebase.
+        They tell the project's story, saying <b>what</b>, <b>when</b> and <b>why</b> things are now the way they are.
+      </p>
+      <p>A well-cared for log can make tools like <code>git log</code>, <code>git blame</code> and more come to life.</p>
+      <p>Concise messages can help to:</p>
+      <ul>
+        <li>Provide meaningful context to fellow developers (and to your future self)</li>
+        <li>Understand what a pull request is about</li>
+        <li>Understand why a certain piece of code exists</li>
+        <li>Search when code was added or removed</li>
+        <li>Track down the source of bugs in our code</li>
+        <li>Improve a projects maintainability</li>
+      </ul>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <script src="src/js/dependencies/gitgraph.1.13.0.min.js"></script>
+      <p>We as developers have conventions and code styles in place to write idiomatic code, so our git history should
+        be no different.</p>
+    </div>
 
-    <script src="src/js/gitgraphtemplate.js"></script>
-    <script src="src/js/examples/rebase.js"></script>
-    <script src="src/js/examples/merge.js"></script>
-    <script src="src/js/examples/mergewithconflict.js"></script>
-    <script src="src/js/examples/trunk.js"></script>
-    <script src="src/js/index.js"></script>
-  </body>
+    <div id="commit-messages-sample-rules" class="gitgraph-detail">
+
+      <p>Here's seven ways of achieving a great commit message:</p>
+      <ul>
+        <li>Separate subject from body with a blank line</li>
+        <li>Limit the subject line to 50 characters</li>
+        <li>Capitalize the subject line</li>
+        <li>Do not end the subject line with a period</li>
+        <li>Use the imperative mood in the subject line</li>
+        <li>Wrap the body at 72 characters</li>
+        <li>Use the body to explain what and why vs. how</li>
+      </ul>
+    </div>
+
+    <div id="integrations-and-policies" class="gitgraph-detail">
+      <p>There are many things that nobody should be wasting time with, mainly because there are automated tasks that can help a project to run smoothly. Here are some examples:</p>
+      <ul>
+          <li>EditorConfig: consistent coding styles between different editors and IDEs (indent style, charset, trailing spaces, new lines)</li>
+          <li>Static code analysis tools: code style, rules, complexity, potential bugs</li>
+          <li>Lint: conventions, custom rules, potential bugs</li>
+          <li>Tests through Continuous Integration</li>
+          <li>Pull Requests: Templates, Commit messages summary, Code Review</li>
+      </ul>
+    </div>
+
+    <div id="command-cleanup" class="gitgraph-detail">
+      <p>Nobody should need a machete 🔪 to browse a repository. For this reason, properly handling branches should also be part of a team's routine. Here are two aliases that can help with the task:</p>
+      <pre>alias cleanup='git fetch origin && git remote prune origin &&
+        git checkout master && git merge origin/master &&
+        git branch --merged | egrep -v "(^\*|master|dev|rel)" | xargs -r git branch -d'</pre>
+      <pre>alias cleanup-origin='git fetch origin && git remote prune origin &&
+        git checkout master && git merge origin/master &&
+        git branch --merged | egrep -v "(^\*|master|dev|rel)" | xargs -r git push --delete origin'</pre>
+
+      <p>Let's break it down:</p>
+      <ul>
+        <li>First, it fetches the remotes and prunes branches that no longer exist</li>
+        <li>Then it updates your main branch. In this example <b>master</b> is the main branch, update this to reflect your branching model</li>
+        <li>Finally, it looks for all branches considered <b>merged</b> when compared with <b>master</b>, runs through a regex to exclude a few patterns and finally, for each result, it deletes the local branch (first alias) and the remote branch (second alias)</li>
+      </ul>
+      <p>In this example, I would like to keep any branches whose name starts with <b>master</b>, <b>dev</b> or <b>rel</b>, i.e. <i>develop</i>, <i>release/2.0</i>. Update the regex accordingly to match the team's needs.</p>
+      <br />
+    </div>
+
+    <div id="command-log-s" class="gitgraph-detail">
+      <p><i>"Oh yeah, we had that in the project before, but I can't remember where."</i> — well, now you can. Sometimes we can't just do a <i>find all</i> because what we're looking for is no longer there.</p>
+      <pre>git log -p --all -S 'code snippet'</pre>
+      <p>The command above will output every log entry in which the code snippet is found.</p>
+      <br />
+    </div>
+
+    <div id="command-bisect" class="gitgraph-detail">
+      <p>Sometimes finding when a bug was introduced can be tricky, even trickier if the file is updated often and <i>the commit messages aren't that helpful</i> 👀. Fortunately, git has a command that can automate the lookup of a faulty commit.</p>
+      <p>By using <code>git bisect</code> we can perform a binary search, running a functional test until the first bad revision is found.</p>
+      <pre>git bisect start HEAD 1c5ba7a45c8dbca19c4dfbae5d4f83873f11fde9<br />git bisect run ./bisect-test.sh</pre>
+      <br />
+    </div>
+
+    <div id="command-ls-files" class="gitgraph-detail">
+      <p>It could be the case that a file previously committed to source control needs to be removed, but it will still exist locally. When that happens just updating the <code>.gitignore</code> file won't be enough.</p>
+      <pre>git ls-files -ci --exclude-standard -z | xargs -r git rm --cached</pre>
+      <p>The command above will look at all the cached and ignored files, removing each entry found. Commit the changes to <code>.gitignore</code> and you're good to go.</p>
+      <br />
+    </div>
+
+    <div id="sources-and-recommended-reads" class="gitgraph-detail">
+      <h3>If you're really into git</h3>
+      <p><a href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">Git from the inside out</a></p>
+
+      <h3>Branching models</h3>
+      <p><a href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></p>
+      <p><a href="https://www.toptal.com/software/trunk-based-development-git-flow">Trunk-based Development vs. Git
+          Flow</a></p>
+
+      <h3>Commit messages</h3>
+      <p><a href="https://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message</a></p>
+
+      <h3>Other topics</h3>
+      <p><a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
+      <p><a href="https://nathanleclaire.com/blog/2014/09/14/dont-be-scared-of-git-rebase/">Don't Be Scared of git
+          rebase</a></p>
+      <p><a href="https://medium.com/@fredrikmorken/why-you-should-stop-using-git-rebase-5552bee4fed1">Why you should
+          stop using Git rebase</a></p>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="src/js/dependencies/gitgraph.1.13.0.min.js"></script>
+  <script src="src/js/dependencies/material-components-web.min.js"></script>
+
+  <script src="src/js/gitgraphtemplate.js"></script>
+  <script src="src/js/examples/rebase.js"></script>
+  <script src="src/js/examples/merge.js"></script>
+  <script src="src/js/examples/mergewithconflict.js"></script>
+  <script src="src/js/examples/trunk.js"></script>
+  <script src="src/js/examples/interactive.js"></script>
+
+  <script>
+    var demo = InteractiveDemo();
+
+    function drawNext() {
+      demo.drawNextStep();
+    }
+
+    function restart() {
+      demo.restart();
+    }
+  </script>
+
+  <script src="src/js/index.js"></script>
+</body>
+
 </html>
